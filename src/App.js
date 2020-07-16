@@ -1,25 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NavTabs from "./components/TabBar.js";
+import stockimg from './view_computer.png';
+//import Box from '@material-ui/core/Box';
+//<PageNavbar />
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React 2
-        </a>
-      </header>
-    </div>
+    <>
+      <NavTabs></NavTabs>
+      <br></br>
+      <img class = "stockpic" src={stockimg} alt="Viewing Computer"/>
+    </>
   );
 }
 
