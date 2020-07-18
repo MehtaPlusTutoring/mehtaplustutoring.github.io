@@ -5,6 +5,15 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import logo from './mehtapluslogo.png';
 import './components.css';
+import stockimg from './view_computer.png';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 
 const AntTabs = withStyles({
   root: {
@@ -89,9 +98,54 @@ export default function NavTabs() {
             </AntTabs>
         </Grid>
       </Grid>
+      <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
 
-
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+  
+    </Router>
       </div>
     </div>
+    
   );
+}
+
+ //<br></br>
+
+function Home() {
+  return <img class = "stockpic" src={stockimg} alt="Viewing Computer"/>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
 }
