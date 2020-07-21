@@ -1,7 +1,7 @@
 {
   "name": "mehtaplustutoring",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "homepage": "https://mehtaplustutoring.github.io/",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

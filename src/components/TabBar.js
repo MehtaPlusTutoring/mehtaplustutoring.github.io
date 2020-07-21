@@ -3,24 +3,26 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import logo from './mehtapluslogo.png';
+import logo from './images/mehtapluslogo.png';
 import './components.css';
-import stockimg from './view_computer.png';
+import Home from './Home.js';
+import Organizations from './Organizations.js'
+import About from './About.js'
+import Students from './Students.js'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect
 } from "react-router-dom";
 
 const AntTabs = withStyles({
   root: {
-   // borderBottom: '1px solid #e8e8e8',
+    //borderBottom: '1px solid #e8e8e8',
   },
   indicator: {
-    backgroundColor: '#1890ff',
+    backgroundColor: '#ffffff',
   },
 })(Tabs);
 
@@ -28,9 +30,9 @@ const AntTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
     minWidth: 70,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(8),
+    marginRight: theme.spacing(3),
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -71,81 +73,79 @@ const useStyles = makeStyles((theme) => ({
   demo2: {
     backgroundColor: '#2e1534',
   },
+  logophoto: {
+    width:'75%',
+    minWidth: '250px'
+  },
 }));
 
 export default function NavTabs() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(-1);
+  // eslint-disable-next-line
+  var id = 0;
+  if(window.location.pathname === "/about"){
+    id=3;
+  }
+  else if(window.location.pathname === "/students"){
+    id=1;
+  }
+  else if(window.location.pathname === "/organizations"){
+    id=2;
+  }
+  else{
+    id=0;
+  }
 
+  const [value, setValue] = React.useState(id);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+  setValue(newValue);
   };
 
+
+  //href="/students" 
+  //href="organizations" 
+  //href="/about" 
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
+      <Router>
       <Grid container spacing={3}>
-      <Grid item xs={6}>
-            <a href="https://mehtaplustutoring.github.io/"><img src={logo} alt="logo" class="logophoto"/></a>
+        <Grid item xs={5}>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <Link to="/" onClick={handleChange}><img src={logo} alt="logo" className={classes.logophoto}/></Link>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
             <br></br>
             <br></br>
-            <AntTabs value={value} onChange={handleChange} aria-label="ant example">  
-            <AntTab label="Students & Parents" />
-            <AntTab label="Organizations" />
-            <AntTab label="About Us" />
+            <AntTabs value={value} class="antabs" aria-label="ant example">  
+            <AntTab disabled/>
+            <AntTab href="/students" onChange={handleChange} label="Students & Parents"/>
+            <AntTab href="organizations" onChange={handleChange} label="Organizations" />
+            <AntTab href="/about" onChange={handleChange} label="About Us"/>
             </AntTabs>
         </Grid>
       </Grid>
-      <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+    
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/students" render={Students}>
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/about" render={About}>
           </Route>
-          <Route exact path="/">
+          <Route path="/organizations" render={Organizations}>
+          </Route>
+          <Route path="/">
             <Home />
           </Route>
         </Switch>
+        </Router>
       </div>
   
-    </Router>
-      </div>
-    </div>
-    
+
+      </div>    
   );
 }
 
  //<br></br>
-
-function Home() {
-  return <img class = "stockpic" src={stockimg} alt="Viewing Computer"/>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
