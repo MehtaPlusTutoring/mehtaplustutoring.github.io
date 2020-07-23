@@ -5,15 +5,8 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import logo from './images/mehtapluslogo.png';
 import './components.css';
-import Home from './Home.js';
-import Organizations from './Organizations.js'
-import About from './About.js'
-import Students from './Students.js'
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
 } from "react-router-dom";
 
@@ -108,7 +101,6 @@ export default function NavTabs() {
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
-      <Router>
       <Grid container spacing={3}>
         <Grid item xs={5}>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -127,20 +119,7 @@ export default function NavTabs() {
       </Grid>
     
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/students" render={Students}>
-          </Route>
-          <Route path="/about" render={About}>
-          </Route>
-          <Route path="/organizations" render={Organizations}>
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-        </Router>
+  
       </div>
   
 
@@ -149,3 +128,4 @@ export default function NavTabs() {
 }
 
  //<br></br>
+
